@@ -20,7 +20,7 @@ class TrancheTest extends TestCase
         $tranche->setMonthlyInterestRate($interestRate);
         $this->assertEquals($interestRate,$tranche->getMonthlyInterestRate());
 
-        $tranche->setAmount($interestRate);
+        $tranche->setAmount($amount);
         $this->assertEquals($amount,$tranche->getAmount());
     }
 
