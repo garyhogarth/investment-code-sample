@@ -15,6 +15,7 @@ class TrancheTest extends TestCase
     {
         $interestRate = 0.03;
         $amount = 1000;
+        $name = 'A';
 
         $tranche = new Tranche();
 
@@ -23,6 +24,9 @@ class TrancheTest extends TestCase
 
         $tranche->setAmount($amount);
         $this->assertEquals($amount,$tranche->getAmount());
+
+        $tranche->setName($name);
+        $this->assertEquals($name,$tranche->getName());
     }
 
     /**

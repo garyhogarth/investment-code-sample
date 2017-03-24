@@ -22,8 +22,8 @@ class LoanTest extends TestCase
     {
         $startDate = new \DateTime('now');
         $endDate = new \DateTime('+ 1 week');
-        $tranche1 = new Tranche();
-        $tranche2 = new Tranche();
+        $trancheA = new Tranche('A',1000,0.03);
+        $trancheB = new Tranche('B',1000,0.06);
 
 
         $loan = new Loan();
@@ -33,12 +33,15 @@ class LoanTest extends TestCase
         $this->assertEquals($startDate,$loan->getStartDate());
         $this->assertEquals($endDate,$loan->getEndDate());
 
-        $loan->addTranche($tranche1);
+        $loan->addTranche($trancheA);
         $this->assertEquals(1,count($loan->getTranches()));
-        $loan->addTranche($tranche2);
+
+        $loan->addTranche($trancheB);
         $this->assertEquals(2,count($loan->getTranches()));
-        $this->assertEquals($tranche1,$loan->getTranches()[0]);
-        $this->assertEquals($tranche2,$loan->getTranches()[1]);
+
+        $this->assertEquals($trancheA,$loan->getTranches()[0]);
+        $this->assertEquals($trancheB,$loan->getTranches()[1]);
+
     }
 
     /**

@@ -9,15 +9,24 @@ class Loan
     private $endDate;
     private $tranches = [];
 
-    public function __construct()
+
+    public static function create(\DateTime $startDate, \DateTime $endDate, array $tranches) : Loan
     {
-        // Do nothing for now
+        $loan = new Loan();
+        $loan->setStartDate($startDate);
+        $loan->setEndDate($endDate);
+
+        foreach ($tranches as $tranche) {
+            $loan->addTranche($tranche);
+        }
+
+        return $loan;
     }
 
     /**
      * @return mixed
      */
-    public function getStartDate()
+    public function getStartDate() : \DateTime
     {
         return $this->startDate;
     }
@@ -33,7 +42,7 @@ class Loan
     /**
      * @return mixed
      */
-    public function getEndDate()
+    public function getEndDate() : \DateTime
     {
         return $this->endDate;
     }
@@ -49,18 +58,18 @@ class Loan
     /**
      * @return array
      */
-    public function getTranches()
+    public function getTranches() : array
     {
         return $this->tranches;
     }
 
     /**
      * @param Tranche $tranche
-     * @return array
      */
     public function addTranche(Tranche $tranche)
     {
-        return $this->tranches[] = $tranche;
+        $tranche->setLoan($this);
+        $this->tranches[] = $tranche;
     }
 
 }
