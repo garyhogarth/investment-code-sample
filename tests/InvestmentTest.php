@@ -74,9 +74,24 @@ class InvestmentTest extends TestCase
 
         InvestmentService::invest($this->investor4,1100,$this->trancheB, \DateTime::createFromFormat('d/m/Y', '25/10/2015'));
 
-        $this->assertEquals(500,$this->trancheA->getInvestmentAvailable());
-        $this->assertEquals(500,$this->trancheA->getInvestmentTotal());
-        $this->assertEquals(1,count($this->trancheA->getInvestmentTotal()));
+        $this->assertEquals(500,$this->trancheB->getInvestmentAvailable());
+        $this->assertEquals(500,$this->trancheB->getInvestmentTotal());
+        $this->assertEquals(1,count($this->trancheB->getInvestmentTotal()));
+
+    }
+
+    public function testInterestCalculations()
+    {
+
+        InvestmentService::invest($this->investor1,1000,$this->trancheA, \DateTime::createFromFormat('d/m/Y', '03/10/2015'));
+        InvestmentService::invest($this->investor3,500,$this->trancheB, \DateTime::createFromFormat('d/m/Y', '10/10/2015'));
+
+        $startDate = \DateTime::createFromFormat('d/m/Y', '01/10/2015');
+        $endDate = \DateTime::createFromFormat('d/m/Y', '31/10/2015');
+        $this->assertEquals(28.06,$this->investor1->getEarningsForPeriod($startDate,$endDate));
+        $this->assertEquals(0,$this->investor2->getEarningsForPeriod($startDate,$endDate));
+        $this->assertEquals(21.29,$this->investor3->getEarningsForPeriod($startDate,$endDate));
+        $this->assertEquals(0,$this->investor4->getEarningsForPeriod($startDate,$endDate));
 
     }
 }

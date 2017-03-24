@@ -11,6 +11,26 @@ use App\Models\Tranche;
 class LoanTest extends TestCase
 {
     /**
+     * @covers Loan::create()
+     */
+    public function testFactoryMethod()
+    {
+        $startDate = new \DateTime('now');
+        $endDate = new \DateTime('+ 1 week');
+        $trancheA = new Tranche('A',1000,0.03);
+        $trancheB = new Tranche('B',1000,0.06);
+
+
+        $loan = Loan::create($startDate, $endDate, [$trancheA, $trancheB]);
+
+        $this->assertEquals($startDate,$loan->getStartDate());
+        $this->assertEquals($endDate,$loan->getEndDate());
+        $this->assertEquals(2,count($loan->getTranches()));
+        $this->assertEquals($trancheA,$loan->getTranches()[0]);
+        $this->assertEquals($trancheB,$loan->getTranches()[1]);
+    }
+
+    /**
      * @covers Loan::setStartDate()
      * @covers Loan::setEndDate()
      * @covers Loan::addTranche()

@@ -8,6 +8,22 @@ use App\Models\Tranche;
 class TrancheTest extends TestCase
 {
     /**
+     * @covers Tranche::create()
+     */
+    public function testFactoryMethod()
+    {
+        $interestRate = 0.03;
+        $amount = 1000;
+        $name = 'A';
+
+        $tranche = Tranche::create($name,$amount,$interestRate);
+
+        $this->assertEquals($interestRate,$tranche->getMonthlyInterestRate());
+        $this->assertEquals($amount,$tranche->getAmount());
+        $this->assertEquals($name,$tranche->getName());
+    }
+
+    /**
      * @covers Tranche::setMonthlyInterestRate()
      * @covers Tranche::setAmount()
      */
