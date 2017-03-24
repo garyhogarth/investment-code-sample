@@ -11,7 +11,8 @@ class TrancheTest extends TestCase
      * @covers Tranche::setMonthlyInterestRate()
      * @covers Tranche::setAmount()
      */
-    public function testSettersSetCorrectlyWhenGivenValidData() {
+    public function testSettersSetCorrectlyWhenGivenValidData()
+    {
         $interestRate = 0.03;
         $amount = 1000;
 
@@ -27,7 +28,8 @@ class TrancheTest extends TestCase
     /**
      * @covers Tranche::setMonthlyInterestRate()
      */
-    public function testSetMonthlyInterestRateDoesNotAllowNonFloat() {
+    public function testSetMonthlyInterestRateDoesNotAllowNonFloat()
+    {
         $interestRate = 'test';
 
         $this->expectException(\TypeError::class);
@@ -36,6 +38,21 @@ class TrancheTest extends TestCase
         $tranche->setMonthlyInterestRate($interestRate);
 
         $this->assertNotEquals($interestRate,$tranche->getMonthlyInterestRate());
+    }
+
+    /**
+     * @covers Tranche::setAmount()
+     */
+    public function testSetAmountDoesNotAllowNonFloat()
+    {
+        $amount = 'test';
+
+        $this->expectException(\TypeError::class);
+
+        $tranche = new Tranche();
+        $tranche->setAmount($amount);
+
+        $this->assertNotEquals($amount,$tranche->getAmount());
     }
 
 }

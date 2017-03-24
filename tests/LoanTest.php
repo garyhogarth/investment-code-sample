@@ -18,7 +18,8 @@ class LoanTest extends TestCase
      * @covers Loan::getStartDate()
      * @covers Loan::getEndDate()
      */
-    public function testSettersSetCorrectlyWhenGivenValidData() {
+    public function testSettersSetCorrectlyWhenGivenValidData()
+    {
         $startDate = new \DateTime('now');
         $endDate = new \DateTime('+ 1 week');
         $tranche1 = new Tranche();
@@ -43,7 +44,8 @@ class LoanTest extends TestCase
     /**
      * @covers Loan::setStartDate()
      */
-    public function testSetStartDoesNotAllowNonDateTimeObjects() {
+    public function testSetStartDoesNotAllowNonDateTimeObjects()
+    {
         $startDate = 'test';
 
         $this->expectException(\TypeError::class);
