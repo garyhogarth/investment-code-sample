@@ -44,7 +44,7 @@ class InvestmentService
         }
 
         // OK lets create the investment and deduct from the investors wallet
-        $investment = Investment::create($investor,$tranche,$amount);
+        $investment = Investment::create($investor,$tranche,$amount, $investmentDate);
         $tranche->addInvestment($investment);
         $investor->addInvestment($investment);
     }
