@@ -62,4 +62,15 @@ class Investor
         $this->modifyBalance($investment->getAmount()*-1);
     }
 
+    public function getEarningsForPeriod(\DateTime $startDate, \DateTime $endDate)
+    {
+        $earnings = 0;
+
+        foreach($this->getInvestments() as $investment) {
+            $earnings = $earnings + $investment->getEarningsForPeriod($startDate, $endDate);
+        }
+
+        return $earnings;
+    }
+
 }

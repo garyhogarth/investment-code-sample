@@ -10,6 +10,14 @@ class Loan
     private $tranches = [];
 
 
+    /**
+     * Factory Method
+     *
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
+     * @param array $tranches
+     * @return Loan
+     */
     public static function create(\DateTime $startDate, \DateTime $endDate, array $tranches) : Loan
     {
         $loan = new Loan();

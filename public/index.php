@@ -62,3 +62,6 @@ try {
 } catch (Exception $e) {
     echo 'Caught exception: ',  $e->getMessage(), "</br>";
 }
+
+$startDate = \DateTime::createFromFormat('d/m/Y', '01/10/2015');
+$endDate = \DateTime::createFromFormat('d/m/Y', '31/10/2015');
